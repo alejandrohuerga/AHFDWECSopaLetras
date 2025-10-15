@@ -34,3 +34,37 @@ function encontrarPalabraMasLarga(palabras){
     return palabraMasLarga;
 }
 
+/* 
+    - Funcion que calcula la dimensión del tablero.
+    - La función devuelve un array con las dimension calculada previamente.
+    - la función recibe como parametro el array de palabras.
+    - Utilizamos las funciones creadas anteriormente para calcular la dimensión del tablero 
+      (contarLetrasPalbras y encontrarPalabraMasLarga).
+
+*/
+
+function calcularDimensionTablero(palabras){
+
+    var totalLetras=contarLetrasPalabras(palabras);
+    var palabraLarga=encontrarPalabraMasLarga(palabras);
+    var longitudMax=palabraLarga.length;
+
+    var dimension=longitudMax;
+    var tablero=new Array(dimension);
+
+    while(dimension*dimension <2 * totalLetras){
+        dimension++;
+    }
+
+    for(let i=0;i<dimension;i++){
+        tablero[i]=new Array(dimension);
+        for(let j=0;j<dimension;j++){
+            tablero[i][j]='';
+        }
+    }
+
+    return tablero;
+}
+
+console.log(calcularDimensionTablero(palabras));
+
