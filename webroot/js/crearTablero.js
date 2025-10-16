@@ -3,7 +3,8 @@
 
 var palabras=new Array();
 palabras=["PATO","BALON","MONITOR","FEMUR","ORFANATO","BALONCESTO"];
-
+var dimension=calcularDimensionTablero(palabras);
+var posicion=calcularPosicionAleatoria(dimension);
 /*
     La función contarLetrasPalabras recibe como  parametro un array.
     Devuelve la suma de todas las letras de todas las palabras.
@@ -50,12 +51,25 @@ function calcularDimensionTablero(palabras){
     var longitudMax=palabraLarga.length;
 
     var dimension=longitudMax;
-    var tablero=new Array(dimension);
+    
 
     while(dimension*dimension <2 * totalLetras){
         dimension++;
     }
 
+    return dimension;
+    
+}
+
+/*
+    - Función que crea un array bidimensional el cual representa un tablero.
+    - La función recibe como parametro la dimension calculada el la funcion calcularDimensionTablero.
+    - La funcion devuelve un array bidimensional (Tablero). 
+*/ 
+
+function crearTablero(dimension){
+    var tablero=new Array();
+    dimension=calcularDimensionTablero(palabras);
     for(let i=0;i<dimension;i++){
         tablero[i]=new Array(dimension);
         for(let j=0;j<dimension;j++){
@@ -66,5 +80,28 @@ function calcularDimensionTablero(palabras){
     return tablero;
 }
 
-console.log(calcularDimensionTablero(palabras));
+//console.log(crearTablero(palabras));
 
+/*
+    - Función que calcula una posicion aleatoria dentro de la dimension del tablero.
+    - La función recibe como parametro la dimension calculada el la funcion calcularDimensionTablero.
+    - La funcion devuelve un array con las dos posiciones generadas aleatoriamente.
+*/ 
+
+function calcularPosicionAleatoria(dimension){
+
+    var posicionX=Math.floor(Math.random()*dimension);
+    var posicionY=Math.floor(Math.random()*dimension);
+
+    var posicionAleatoria=[posicionX,posicionY];
+    
+    return posicionAleatoria;
+    
+}
+
+
+
+
+function calcularDireccionAlaetoria(){
+
+}
