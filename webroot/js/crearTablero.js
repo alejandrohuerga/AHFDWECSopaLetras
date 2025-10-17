@@ -3,8 +3,7 @@
 
 var palabras=new Array();
 palabras=["PATO","BALON","MONITOR","FEMUR","ORFANATO","BALONCESTO"];
-var dimension=calcularDimensionTablero(palabras);
-var posicion=calcularPosicionAleatoria(dimension);
+
 /*
     La función contarLetrasPalabras recibe como  parametro un array.
     Devuelve la suma de todas las letras de todas las palabras.
@@ -61,6 +60,8 @@ function calcularDimensionTablero(palabras){
     
 }
 
+var dimension=calcularDimensionTablero(palabras);
+
 /*
     - Función que crea un array bidimensional el cual representa un tablero.
     - La función recibe como parametro la dimension calculada el la funcion calcularDimensionTablero.
@@ -80,6 +81,9 @@ function crearTablero(dimension){
     return tablero;
 }
 
+var tablero=crearTablero(dimension);
+
+
 //console.log(crearTablero(palabras));
 
 /*
@@ -93,15 +97,26 @@ function calcularPosicionAleatoria(dimension){
     var posicionX=Math.floor(Math.random()*dimension);
     var posicionY=Math.floor(Math.random()*dimension);
 
+    
     var posicionAleatoria=[posicionX,posicionY];
+    
+
     
     return posicionAleatoria;
     
 }
 
 
+var posicion=calcularPosicionAleatoria(dimension);
+
+
+/* 
+    - Esta función calcula una dirección aleatoria de entre 8 posibles.
+    - No calcula si la palabra entra o no entra simplemente me manda una dirección
+*/
 
 
 function calcularDireccionAlaetoria(){
-
+    
 }
+
