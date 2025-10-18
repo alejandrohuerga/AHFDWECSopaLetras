@@ -110,13 +110,59 @@ function calcularPosicionAleatoria(dimension){
 var posicion=calcularPosicionAleatoria(dimension);
 
 
-/* 
-    - Esta función calcula una dirección aleatoria de entre 8 posibles.
-    - No calcula si la palabra entra o no entra simplemente me manda una dirección
+// Constante (Array) que almacena todas las diecciones posibles.
+
+const direcciones=[
+        {dx:1, dy:0},   // derecha
+        {dx:-1,dy:0},   // izquierda
+        {dx:0, dy:1},   // arriba
+        {dx:0, dy:-1},  // abajo
+        {dx:1,dy:1},    // diagonal arriba derecha
+        {dx:-1,dy:1},   // diagonal arriba izquierda
+        {dx:1, dy:-1},  // diagonal abajo derecha
+        {dx:-1, dy:-1}, // diagonal abajo izquierda
+];
+
+/*
+    - Función que calcula las posiciones validas de la constante.
+    - Recibe como parámetros (posicion aleatoria,dimension del tablero,array de direcciones).
+    - Utiliza el método de los Arrays .filter() para filtrar las direcciones.
+    - Devuelve un array con las direcciones posibles segun el filtrado.
 */
+function direccionesValidas(posicion,dimension,direcciones){
+    var x=posicion[0];
+    var y = posicion[1];
 
+    var direccionesValidas=direcciones.filter(({dx,dy})=>{
+        var nx=dx+x;
+        var ny=dy+y;
 
-function calcularDireccionAlaetoria(){
-    
+        return nx >= 0 && nx < dimension && ny >= 0 && ny < dimension;
+    });
+
+    return direccionesValidas;
 }
 
+var arrayDireccionesValidas=direccionesValidas(posicion,dimension,direcciones);
+
+
+/* 
+    - Función que calcula una direccion aleatoria entre las posibles.
+    - Recibe como parametro el arrayDireccionesValidas.
+    - Devuelve un indice del array de posiciones validas.
+*/
+function calcularDireccionAleatoria(arrayDireccionesValidas){
+
+    var indice= Math.floor(Math.random()*arrayDireccionesValidas.length);
+
+    return arrayDireccionesValidas[indice];
+}
+
+var direccionAleatoria=calcularDireccionAleatoria(arrayDireccionesValidas);
+
+
+
+console.log("Esta es la dimension del tablero: "+dimension);
+console.log("Esta es la posicion aleatoria generada: "+posicion);
+console.log(arrayDireccionesValidas);
+console.log(direccionAleatoria);
