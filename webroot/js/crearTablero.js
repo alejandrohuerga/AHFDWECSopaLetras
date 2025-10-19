@@ -96,11 +96,8 @@ function calcularPosicionAleatoria(dimension){
 
     var posicionX=Math.floor(Math.random()*dimension);
     var posicionY=Math.floor(Math.random()*dimension);
-
     
     var posicionAleatoria=[posicionX,posicionY];
-    
-
     
     return posicionAleatoria;
     
@@ -117,10 +114,10 @@ const direcciones=[
         {dx:-1,dy:0},   // izquierda
         {dx:0, dy:1},   // arriba
         {dx:0, dy:-1},  // abajo
-        {dx:1,dy:1},    // diagonal arriba derecha
-        {dx:-1,dy:1},   // diagonal arriba izquierda
-        {dx:1, dy:-1},  // diagonal abajo derecha
-        {dx:-1, dy:-1}, // diagonal abajo izquierda
+        {dx:1,dy:1},    // diagonal abajo derecha
+        {dx:-1,dy:1},   // diagonal abajo izquierda
+        {dx:1, dy:-1},  // diagonal arriba derecha
+        {dx:-1, dy:-1}, // diagonal arriba izquierda
 ];
 
 /*
@@ -129,6 +126,7 @@ const direcciones=[
     - Utiliza el método de los Arrays .filter() para filtrar las direcciones.
     - Devuelve un array con las direcciones posibles segun el filtrado.
 */
+
 function direccionesValidas(posicion,dimension,direcciones){
     var x=posicion[0];
     var y = posicion[1];
@@ -143,6 +141,7 @@ function direccionesValidas(posicion,dimension,direcciones){
     return direccionesValidas;
 }
 
+
 var arrayDireccionesValidas=direccionesValidas(posicion,dimension,direcciones);
 
 
@@ -151,12 +150,14 @@ var arrayDireccionesValidas=direccionesValidas(posicion,dimension,direcciones);
     - Recibe como parametro el arrayDireccionesValidas.
     - Devuelve un indice del array de posiciones validas.
 */
+
 function calcularDireccionAleatoria(arrayDireccionesValidas){
 
     var indice= Math.floor(Math.random()*arrayDireccionesValidas.length);
 
     return arrayDireccionesValidas[indice];
 }
+
 
 var direccionAleatoria=calcularDireccionAleatoria(arrayDireccionesValidas);
 
@@ -166,3 +167,31 @@ console.log("Esta es la dimension del tablero: "+dimension);
 console.log("Esta es la posicion aleatoria generada: "+posicion);
 console.log(arrayDireccionesValidas);
 console.log(direccionAleatoria);
+
+/* 
+    - Funcion que comprueba si la palabra entra o no en el tablero.
+    - Devuelve true o false dependiendo de si entra o no.
+    - Recibe como parametros (tablero,palabra,posicion,direccion).
+*/
+function comprobarPalabraEntra (tablero,palabra,posicion,direccionAleatoria,dimension){
+
+    var x=posicion[0];
+    var y = posicion[1];
+    var dx=direccionAleatoria.dx;
+    var dy=direccionAleatoria.dy;
+
+    for (let i = 0; i < palabra.length; i++) {
+        const nx = x + dx * i; // Nueva posición en X
+        const ny = y + dy * i; // Nueva posición en Y
+
+        // Si se sale de los límites, la palabra no entra
+        if (nx < 0 || nx >= dimension || ny < 0 || ny >= dimension) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+
