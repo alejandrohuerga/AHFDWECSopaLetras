@@ -4,6 +4,12 @@
 var palabras=new Array();
 palabras=["PATO","BALON","MONITOR","FEMUR","ORFANATO","BALONCESTO"];
 
+// Ordenamos el Array de palabras mas larga a mas corta para colocar primero las largas.
+
+palabras=palabras.sort((a,b)=>b.length-a.length);
+
+
+
 /*
     La función contarLetrasPalabras recibe como  parametro un array.
     Devuelve la suma de todas las letras de todas las palabras.
@@ -163,10 +169,7 @@ var direccionAleatoria=calcularDireccionAleatoria(arrayDireccionesValidas);
 
 
 
-console.log("Esta es la dimension del tablero: "+dimension);
-console.log("Esta es la posicion aleatoria generada: "+posicion);
-console.log(arrayDireccionesValidas);
-console.log(direccionAleatoria);
+
 
 /* 
     - Funcion que comprueba si la palabra entra o no en el tablero.
@@ -192,6 +195,50 @@ function comprobarPalabraEntra (tablero,palabra,posicion,direccionAleatoria,dime
 
     return true;
 }
+
+
+/*
+console.log("Esta es la dimension del tablero: "+dimension);
+console.log("Esta es la posicion aleatoria generada: "+posicion);
+console.log(arrayDireccionesValidas);
+console.log(direccionAleatoria);
+console.log("Esta es la primera palabra: "+palabras[0]);
+console.log(comprobarPalabraEntra(tablero,palabras[0],posicion,direccionAleatoria,dimension));
+*/
+
+function escribirPalabra(tablero,palabras,posicion,direccionAleatoria){
+    
+    var nx=posicion[0];
+    var ny=posicion[1];
+    var dx=direccionAleatoria.dx;
+    var dy=direccionAleatoria.dy;
+
+    for(i=0;i<palabras.length;i++){
+        var palabra=palabras[i];
+        
+        calcularPosicionAleatoria(dimension);
+        direccionesValidas(posicion,dimension,direcciones);
+        calcularDireccionAleatoria(arrayDireccionesValidas);
+        comprobarPalabraEntra(tablero,palabra,posicion,direccionAleatoria,dimension);
+        
+        if(comprobarPalabraEntra(tablero,palabra,posicion,direccionAleatoria,dimension)==true){
+            for(j=0;j<palabra.length;j++){
+                tablero[nx][ny]=palabra.charAt(j);
+                nx +=  dx;
+                ny +=  dy;   
+            }
+            
+        }
+    }
+    
+    return tablero;
+}
+
+
+console.log(escribirPalabra(tablero,palabras,posicion,direccionAleatoria));
+
+
+
 
 
 
