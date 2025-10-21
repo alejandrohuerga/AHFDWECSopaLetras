@@ -2,3 +2,47 @@
     box-sizing: border-box;
 }
 
+/* Centrar el h1 */
+h1{
+    text-align: center;
+}
+
+
+/* Centrar el contenedor de palabras */
+div{
+    text-align: center;
+    margin: 30px auto;
+}
+
+/* Lista horizontal sin viñetas */
+ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Estilo de cada palabra */
+li {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Centrar la tabla */
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: Arial;
+    font-size: 18px;
+}
+
+/* Estilo de las celdas */
+td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #333;
+}
