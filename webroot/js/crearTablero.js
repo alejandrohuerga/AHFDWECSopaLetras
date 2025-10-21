@@ -9,7 +9,6 @@ palabras=["PATO","BALON","MONITOR","FEMUR","ORFANATO","BALONCESTO"];
 palabras=palabras.sort((a,b)=>b.length-a.length);
 
 
-
 /*
     La función contarLetrasPalabras recibe como  parametro un array.
     Devuelve la suma de todas las letras de todas las palabras.
@@ -45,7 +44,7 @@ function encontrarPalabraMasLarga(palabras){
     - La función devuelve un array con las dimension calculada previamente.
     - la función recibe como parametro el array de palabras.
     - Utilizamos las funciones creadas anteriormente para calcular la dimensión del tablero 
-      (contarLetrasPalbras y encontrarPalabraMasLarga).
+    (contarLetrasPalbras y encontrarPalabraMasLarga).
 
 */
 
@@ -196,82 +195,11 @@ function comprobarPalabraEntra (tablero,palabra,posicion,direccionAleatoria,dime
     return true;
 }
 
-
-/*
-console.log("Esta es la dimension del tablero: "+dimension);
-console.log("Esta es la posicion aleatoria generada: "+posicion);
-console.log(arrayDireccionesValidas);
-console.log(direccionAleatoria);
-console.log("Esta es la primera palabra: "+palabras[0]);
-console.log(comprobarPalabraEntra(tablero,palabras[0],posicion,direccionAleatoria,dimension));
-*/
-/*
-
-
-
-/*
-console.log("Esta es la dimension del tablero: "+dimension);
-console.log("Esta es la posicion aleatoria generada: "+posicion);
-console.log(arrayDireccionesValidas);
-console.log(direccionAleatoria);
-console.log("Esta es la primera palabra: "+palabras[0]);
-console.log(comprobarPalabraEntra(tablero,palabras[0],posicion,direccionAleatoria,dimension));
-console.log(escribirPalabra(tablero,palabras,posicion,direccionAleatoria));
-*/
-/*
-function escribirPalabra(tablero,palabras,posicion,direccionAleatoria){
-
-    //Recorremos el array de palabras una por una.
-    for(var i=0;i<palabras.length;i++){
-
-        var palabra=palabras[i]; // palabra es igual al valor de i.
-        posicion=calcularPosicionAleatoria(dimension);
-        var arrayDirecciones=direccionesValidas(posicion,dimension,direcciones);
-        direccionAleatoria=calcularDireccionAleatoria(arrayDirecciones);
-        var x=posicion[0];
-        var y=posicion[1];
-        var dx=direccionAleatoria.dx;
-        var dy=direccionAleatoria.dy;
-        var entra=comprobarPalabraEntra(tablero,palabra,posicion,direccionAleatoria,dimension);
-
-        
-        entra=puedePoner;
-        }
-        do{
-            posicion=calcularPosicionAleatoria(dimension);
-            arrayDirecciones=direccionesValidas(posicion,dimension,direcciones);
-            direccionAleatoria=calcularDireccionAleatoria(arrayDirecciones);
-            x=posicion[0];
-            y=posicion[1];
-            dx=direccionAleatoria.dx;
-            dy=direccionAleatoria.dy;
-            entra=comprobarPalabraEntra(tablero,palabra,posicion,direccionAleatoria,dimension);
-
-            if(entra){
-                var puedePoner=true;
-                for(let j=0;j<palabra.length;j++){
-                    var nx=x+dx*j;
-                    var ny=y+dy*j;
-                    if(tablero[nx][ny]!='' && tablero[nx][ny]!=palabra.charAt(j)){
-                        puedePoner=false;
-                        break;
-                    }
-                }
-                entra=puedePoner;
-            }
-        }while(entra==false);
-
-        if(entra){
-            for(let j=0;j<palabra.length;j++){
-                ablero[x][y]=palabra.charAt(j);
-                x+=dx;
-                y+=dy;
-            }
-        }
-
-}    
-
-    }
+/* 
+    - Funcion la cual escribe la palabra dentro del tablero.
+    - Recibe como parametros (tablero,palabras,posicion,direccionAleatoria).
+    - Antes de escribir vada letra verifica si la posicion esta vacia o tiene la misma letra.
+    - Devuelve el tablero con las palabras escritas.
 */
 
 function escribirPalabra(tablero,palabras,posicion,direccionAleatoria){
@@ -324,15 +252,81 @@ function escribirPalabra(tablero,palabras,posicion,direccionAleatoria){
             }
         }
 
-        console.log("Palabra: "+palabra+" Posicion: "+posicion[0]+" "+posicion[1]+" Direccion: "+dx+" "+dy);
-
     }
     
     return tablero;
 }
 
-console.log(escribirPalabra(tablero,palabras,posicion,direccionAleatoria));
+/*
+    - Funcion que dibuja el tablero en el documento HTML.
+    - Recorre el tablero generado con un for y lo escribe en el HTML.
+    - Si en el hueco no hay ninguna letra de la palabra pone un td vacio.
+    - Utiliza el objeto document con el metodo write().
+*/
 
+function dibujarTablero(tablero){
+    document.write("<table border='1' cellpadding='7' cellspacing='0' style='border-collapse: collapse; font-family: Arial; font-size: 18px;'>");
+    
+    for(let i=0;i<tablero.length;i++){
+        document.write("<tr>");
+        
+        for(let j=0;j<tablero[i].length;j++){
+            // Si la celda está vacía, mostrar un espacio o guión
+            var letra = tablero[i][j] === '' ? '' : tablero[i][j];
+            document.write("<td style='width: 40px; height: 40px; text-align: center; font-weight: bold;'>"+letra+"</td>");
+        }
+        
+        document.write("</tr>");
+    }
+    
+    document.write("</table>");
+}
+
+/*
+    - Función que rellena los huecos vacios con letras aleatorias.
+    - Recibe como parametro el tablero con las palabras colocadas.
+    - Devuelve el tablero con las palabras y relleno.
+*/
+
+function rellenarTablero(tablero){
+    var letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    for(let i=0;i<tablero.length;i++){
+        for(let j=0;j<tablero[i].length;j++){
+            // Si la celda está vacía, rellenar con letra aleatoria
+            if(tablero[i][j] === ''){
+                var indiceAleatorio = Math.floor(Math.random() * letras.length);
+                tablero[i][j] = letras.charAt(indiceAleatorio);
+            }
+        }
+    }
+    
+    return tablero;
+}
+
+/*
+    - Funcion que escribe las palabras a buscar encima de la sopa de letras.
+    - Recibe como parametro el array de palabras.
+    - Utiliza el objeto document y el metodo write().
+    - Recorre el array para ir escribiendo ccada palabra en una etiqueta li.
+*/
+
+function mostrarPalabras(palabras){
+    
+    document.write("<div>");
+    document.write("<ul>");
+    
+    for(let i=0;i<palabras.length;i++){
+        document.write("<li>"+palabras[i]+"</li>");
+    }
+    
+    document.write("</ul>");
+    document.write("</div>");
+}
+
+mostrarPalabras(palabras);
+rellenarTablero(tablero);
+dibujarTablero(tablero);
 
 
 
