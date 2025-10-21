@@ -1,0 +1,6 @@
+FUNCIONES SOPA DE LETRAS 
+
+- calcularDireccionAleatoria (dimension ???).
+- comprobarPosicionValida (tablero,palabras,posicion,direccion).
+- escribirPalabra (tablero , palabra , posicion, direccion).
+- pintarTablero (tablero).

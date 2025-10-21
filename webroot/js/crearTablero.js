@@ -205,38 +205,133 @@ console.log(direccionAleatoria);
 console.log("Esta es la primera palabra: "+palabras[0]);
 console.log(comprobarPalabraEntra(tablero,palabras[0],posicion,direccionAleatoria,dimension));
 */
+/*
+
+
+
+/*
+console.log("Esta es la dimension del tablero: "+dimension);
+console.log("Esta es la posicion aleatoria generada: "+posicion);
+console.log(arrayDireccionesValidas);
+console.log(direccionAleatoria);
+console.log("Esta es la primera palabra: "+palabras[0]);
+console.log(comprobarPalabraEntra(tablero,palabras[0],posicion,direccionAleatoria,dimension));
+console.log(escribirPalabra(tablero,palabras,posicion,direccionAleatoria));
+*/
+/*
+function escribirPalabra(tablero,palabras,posicion,direccionAleatoria){
+
+    //Recorremos el array de palabras una por una.
+    for(var i=0;i<palabras.length;i++){
+
+        var palabra=palabras[i]; // palabra es igual al valor de i.
+        posicion=calcularPosicionAleatoria(dimension);
+        var arrayDirecciones=direccionesValidas(posicion,dimension,direcciones);
+        direccionAleatoria=calcularDireccionAleatoria(arrayDirecciones);
+        var x=posicion[0];
+        var y=posicion[1];
+        var dx=direccionAleatoria.dx;
+        var dy=direccionAleatoria.dy;
+        var entra=comprobarPalabraEntra(tablero,palabra,posicion,direccionAleatoria,dimension);
+
+        
+        entra=puedePoner;
+        }
+        do{
+            posicion=calcularPosicionAleatoria(dimension);
+            arrayDirecciones=direccionesValidas(posicion,dimension,direcciones);
+            direccionAleatoria=calcularDireccionAleatoria(arrayDirecciones);
+            x=posicion[0];
+            y=posicion[1];
+            dx=direccionAleatoria.dx;
+            dy=direccionAleatoria.dy;
+            entra=comprobarPalabraEntra(tablero,palabra,posicion,direccionAleatoria,dimension);
+
+            if(entra){
+                var puedePoner=true;
+                for(let j=0;j<palabra.length;j++){
+                    var nx=x+dx*j;
+                    var ny=y+dy*j;
+                    if(tablero[nx][ny]!='' && tablero[nx][ny]!=palabra.charAt(j)){
+                        puedePoner=false;
+                        break;
+                    }
+                }
+                entra=puedePoner;
+            }
+        }while(entra==false);
+
+        if(entra){
+            for(let j=0;j<palabra.length;j++){
+                ablero[x][y]=palabra.charAt(j);
+                x+=dx;
+                y+=dy;
+            }
+        }
+
+}    
+
+    }
+*/
 
 function escribirPalabra(tablero,palabras,posicion,direccionAleatoria){
-    
-    var nx=posicion[0];
-    var ny=posicion[1];
-    var dx=direccionAleatoria.dx;
-    var dy=direccionAleatoria.dy;
 
-    for(i=0;i<palabras.length;i++){
-        var palabra=palabras[i];
-        
-        calcularPosicionAleatoria(dimension);
-        direccionesValidas(posicion,dimension,direcciones);
-        calcularDireccionAleatoria(arrayDireccionesValidas);
-        comprobarPalabraEntra(tablero,palabra,posicion,direccionAleatoria,dimension);
-        
-        if(comprobarPalabraEntra(tablero,palabra,posicion,direccionAleatoria,dimension)==true){
-            for(j=0;j<palabra.length;j++){
-                tablero[nx][ny]=palabra.charAt(j);
-                nx +=  dx;
-                ny +=  dy;   
+    //Recorremos el array de palabras una por una.
+    for(var i=0;i<palabras.length;i++){
+
+        var palabra=palabras[i]; // palabra es igual al valor de i.
+        posicion=calcularPosicionAleatoria(dimension);
+        var arrayDirecciones=direccionesValidas(posicion,dimension,direcciones);
+        direccionAleatoria=calcularDireccionAleatoria(arrayDirecciones);
+        var x=posicion[0];
+        var y=posicion[1];
+        var dx=direccionAleatoria.dx;
+        var dy=direccionAleatoria.dy;
+        var entra=comprobarPalabraEntra(tablero,palabra,posicion,direccionAleatoria,dimension);
+
+        do{
+            posicion=calcularPosicionAleatoria(dimension);
+            arrayDirecciones=direccionesValidas(posicion,dimension,direcciones);
+            direccionAleatoria=calcularDireccionAleatoria(arrayDirecciones);
+            x=posicion[0];
+            y=posicion[1];
+            dx=direccionAleatoria.dx;
+            dy=direccionAleatoria.dy;
+            entra=comprobarPalabraEntra(tablero,palabra,posicion,direccionAleatoria,dimension);
+            
+            // Validación de que la posición está vacía o tiene la misma letra
+            if(entra){
+                var puedePoner=true;
+                for(let j=0;j<palabra.length;j++){
+                    var nx=x+dx*j;
+                    var ny=y+dy*j;
+                    if(tablero[nx][ny]!='' && tablero[nx][ny]!=palabra.charAt(j)){
+                        puedePoner=false;
+                        break;
+                    }
+                }
+                entra=puedePoner;
             }
             
+        }while(entra==false);
+
+        // Escribimos la palabra en el tablero
+        if(entra){
+            for(let j=0;j<palabra.length;j++){
+                tablero[x][y]=palabra.charAt(j);
+                x+=dx;
+                y+=dy;
+            }
         }
+
+        console.log("Palabra: "+palabra+" Posicion: "+posicion[0]+" "+posicion[1]+" Direccion: "+dx+" "+dy);
+
     }
     
     return tablero;
 }
 
-
 console.log(escribirPalabra(tablero,palabras,posicion,direccionAleatoria));
-
 
 
 
