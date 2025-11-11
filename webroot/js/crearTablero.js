@@ -289,6 +289,7 @@ function dibujarTablero(tablero){
 */
 
 function rellenarTablero(tablero){
+    
     var letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     for(let i=0;i<tablero.length;i++){
@@ -324,6 +325,7 @@ function mostrarPalabras(palabras){
     document.write("</div>");
 }
 
+escribirPalabra(tablero,palabras,posicion,direccionAleatoria);
 mostrarPalabras(palabras);
 rellenarTablero(tablero);
 dibujarTablero(tablero);

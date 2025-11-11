@@ -1,11 +1,16 @@
 *{
     box-sizing: border-box;
+    margin: 0 auto;
 }
 
-/* Centrar el h1 */
-h1{
+header{
+    margin-top: 0;
     text-align: center;
+    background: lightcoral;
+    height: 80px;
 }
+
+
 
 
 /* Centrar el contenedor de palabras */
