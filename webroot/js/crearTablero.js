@@ -261,25 +261,28 @@ function escribirPalabra(tablero,palabras,posicion,direccionAleatoria){
     - Funcion que dibuja el tablero en el documento HTML.
     - Recorre el tablero generado con un for y lo escribe en el HTML.
     - Si en el hueco no hay ninguna letra de la palabra pone un td vacio.
-    - Utiliza el objeto document con el metodo write().
+    - Utiliza el objeto document los metodos createElement() y appendChild().
 */
 
 function dibujarTablero(tablero){
-    document.write("<table border='1' cellpadding='7' cellspacing='0' style='border-collapse: collapse; font-family: Arial; font-size: 18px;'>");
+    var tabla=document.createElement("table");
     
     for(let i=0;i<tablero.length;i++){
-        document.write("<tr>");
+        var fila=document.createElement("tr");
         
         for(let j=0;j<tablero[i].length;j++){
-            // Si la celda está vacía, mostrar un espacio o guión
             var letra = tablero[i][j] === '' ? '' : tablero[i][j];
-            document.write("<td style='width: 40px; height: 40px; text-align: center; font-weight: bold;'>"+letra+"</td>");
+
+            var celda=document.createElement("td");
+            
+            celda.appendChild(document.createTextNode(letra));
+            fila.appendChild(celda);
         }
-        
-        document.write("</tr>");
+
+        tabla.appendChild(fila);
     }
-    
-    document.write("</table>");
+
+    document.getElementById("contenidoPrincipal").appendChild(tabla);
 }
 
 /*
@@ -308,21 +311,26 @@ function rellenarTablero(tablero){
 /*
     - Funcion que escribe las palabras a buscar encima de la sopa de letras.
     - Recibe como parametro el array de palabras.
-    - Utiliza el objeto document y el metodo write().
+    - Utiliza el objeto document y los metodos createElement() y appendChild().
     - Recorre el array para ir escribiendo ccada palabra en una etiqueta li.
 */
 
 function mostrarPalabras(palabras){
-    
-    document.write("<div>");
-    document.write("<ul>");
-    
+    var div=document.createElement("div");
+    var lista=document.createElement("ul");
+
     for(let i=0;i<palabras.length;i++){
-        document.write("<li>"+palabras[i]+"</li>");
+
+        var elementoLista=document.createElement("li");
+
+        elementoLista.appendChild(document.createTextNode(palabras[i]));
+
+        lista.appendChild(elementoLista);
     }
-    
-    document.write("</ul>");
-    document.write("</div>");
+
+    div.appendChild(lista);
+
+    document.getElementById("contenidoPrincipal").appendChild(div);
 }
 
 escribirPalabra(tablero,palabras,posicion,direccionAleatoria);
