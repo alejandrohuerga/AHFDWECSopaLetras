@@ -333,24 +333,7 @@ function mostrarPalabras(palabras){
     document.getElementById("contenidoPrincipal").appendChild(div);
 }
 
-/*
-    - Funcion que muestra el relog en tiempo real y actualizandose cada segundo.
-    - Utiliza la clase Date.
-*/ 
 
-function mostrarRelog(){
-    var reloj = new Date();
-    var hora = reloj.getHours().toString().padStart(2, '0');
-    var minutos = reloj.getMinutes().toString().padStart(2, '0');
-    var segundos = reloj.getSeconds().toString().padStart(2, '0');
-
-    var textoHora = hora + ":" + minutos + ":" + segundos;
-
-    // Actualizamos el contenido del <p> dentro del footer
-    document.getElementById("piePagina").textContent = textoHora;
-}
-mostrarRelog();
-setInterval(mostrarRelog,1000);
 escribirPalabra(tablero,palabras,posicion,direccionAleatoria);
 mostrarPalabras(palabras);
 rellenarTablero(tablero);
