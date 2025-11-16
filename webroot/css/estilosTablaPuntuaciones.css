@@ -1,0 +1,35 @@
+#contenedorTabla{
+    border: none;
+}
+
+.tabla-puntuaciones {
+    width: 80%;
+    margin: 20px auto;
+    border: 2px solid #333;
+    border-radius: 8px;
+    overflow: hidden; /* para el borde redondeado */
+}
+
+.tabla-puntuaciones thead {
+    background-color: #444;
+    color: white;
+}
+
+.tabla-puntuaciones th,
+.tabla-puntuaciones td {
+    padding: 10px;
+    border: 1px solid #333;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* Filas alternas */
+.tabla-puntuaciones tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover sobre filas */
+.tabla-puntuaciones tbody tr:hover {
+    background-color: #ddd;
+    cursor: default;
+}

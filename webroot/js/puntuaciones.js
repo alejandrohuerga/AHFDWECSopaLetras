@@ -19,89 +19,78 @@ function crearPuntuaciones(){
 
 function crearTablaPuntuaciones(){
 
-    var tabla=document.createElement("table");
-    var thead=document.createElement("thead");
-    var filaHead=document.createElement("tr");
-    var thJugador=document.createElement("th");
-    thJugador.textContent("Jugador");
-    var thPuntuacion=document.createElement("th");
-    thPuntuacion.textContent("Puntuacion");
+    // 1. Obtener el main donde debe ir la tabla
+    var main=document.getElementById("contenidoPrincipal");
 
-    filaHead.appendChild(thJugador);
-    filaHead.appendChild(thPuntuacion);
-    thead.appendChild(filaHead);
+
+    // 2. Creamos contenedorTabla si NO existe
+    let contenedorTabla = document.getElementById("contenedorTabla");
+
+    if (!contenedorTabla) {
+        contenedorTabla = document.createElement("div");
+        contenedorTabla.id = "contenedorTabla";
+        main.appendChild(contenedorTabla);
+    }
+
+    const tabla = document.createElement("table");
+    tabla.classList.add("tabla-puntuaciones");
+
+    // CABECERA
+    const thead = document.createElement("thead");
+    const trHead = document.createElement("tr");
+
+    ["Jugador", "Puntuación"].forEach(texto => {
+        const th = document.createElement("th");
+        th.textContent = texto;
+        trHead.appendChild(th);
+    });
+
+    thead.appendChild(trHead);
     tabla.appendChild(thead);
 
-    var tbody=document.createElement("tbody");
-    let index=0;
 
-    for(let i=0;i<localStorage.length;i++){
-        var jugador=localStorage.key(i);
-        var puntuacion=localStorage.getItem(jugador);
+    // 5. Recuperar puntuaciones del localStorage
+    let datos = [];
 
-        var fila=document.createElement("tr");
-        var celdaJugador=document.createElement("td");
+    for (let i = 0; i < localStorage.length; i++) {
+        let clave = localStorage.key(i);
 
-        celdaJugador.textContent=jugador;
-
-
-        var celdaPuntuacion=document.createElement("td");
-        celdaPuntuacion.textContent=puntuacion;
-
-        fila.appendChild(celdaJugador);
-        fila.appendChild(celdaPuntuacion);
-        tbody.appendChild(fila);
-
-        index++;
-
+        if (clave.startsWith("Jugador")) {
+            datos.push({
+                nombre: clave,
+                puntos: Number(localStorage.getItem(clave))
+            });
+        }
     }
+
+     // Ordenar de mayor a menor
+    datos.sort((a, b) => b.puntos - a.puntos);
+
+    // CUERPO TABLA
+    const tbody = document.createElement("tbody");
+
+    datos.forEach(obj => {
+        const tr = document.createElement("tr");
+        tr.classList.add("fila-puntuacion");
+
+        const tdNombre = document.createElement("td");
+        tdNombre.classList.add("celda-puntuacion");
+        tdNombre.textContent = obj.nombre;
+        
+        const tdPuntos = document.createElement("td");
+        tdPuntos.classList.add("celda-puntuacion");
+        tdPuntos.textContent = obj.puntos;
+        
+
+        tr.appendChild(tdNombre);
+        tr.appendChild(tdPuntos);
+        tbody.appendChild(tr);
+    });
 
     tabla.appendChild(tbody);
 
-    document.getElementById("contenidoPrincipal").appendChild(tabla);
-    /*
-    var contenedorPuntuaciones=document.createElement("div");
-    var tabla=document.createElement("table");
-    tabla.setAttribute("id","tablaPuntuaciones");
-
-    var fila=document.createElement("tr");
-    
-    var encabezado1=document.createElement("th");
-    encabezado1.appendChild(document.createTextNode("Nombre Jugador"));
-
-    var encabezado2=document.createElement("th");
-    encabezado2.appendChild(document.createTextNode("Puntuacion"));
-
-    fila.appendChild(encabezado1);
-    fila.appendChild(encabezado2);
-    tabla.appendChild(fila);
-    contenedorPuntuaciones.appendChild(tabla);
-
-    for(let i=0;i<3;i++){
-
-        var fila=document.createElement("tr");
-        var celda=document.createElement("td");
-        celda.appendChild(document.createTextNode("Jugador"+i));
-        fila.appendChild(celda);
-        
-        for(let i=0;i<1;i++){
-           
-            var celda=document.createElement("td");
-
-            
-            celda.appendChild(document.createTextNode(localStorage.getItem("Jugador"+i)));
-            
-            
-            fila.appendChild(celda);
-        }
-        
-        tabla.appendChild(fila);
-    }
-
-    contenedorPuntuaciones.appendChild(tabla);
-
-    document.getElementById("contenidoPrincipal").appendChild(contenedorPuntuaciones);
-    */
+    // 6. Insertar tabla en el contenedor
+    contenedorTabla.appendChild(tabla);
 }
 
 crearPuntuaciones();

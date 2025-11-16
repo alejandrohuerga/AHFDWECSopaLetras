@@ -13,7 +13,7 @@ header{
 
 
 main{
-    height: 75vh;
+    height: 100vh;
 }
 
 /* Centrar el contenedor de palabras */
@@ -59,6 +59,10 @@ td {
     font-weight: bold;
     border: 1px solid #333;
     padding: 0;
+}
+
+table:nth-last-of-type(2){
+    background: lightpink;
 }
 
 footer{
