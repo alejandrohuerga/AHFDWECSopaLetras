@@ -1,39 +1,39 @@
 
-// Función que crea la barra superior si no existe
+// Función que crea la barra sin conexión mediante el DOM.
+
 function crearBarra(){
-    if (document.getElementById("offline-bar")) return; // evitar duplicados
 
-    const barra = document.createElement("div");
-    barra.id = "offline-bar";
-    barra.textContent = "Sin conexión — no hay red. Algunas funciones pueden no estar disponibles.";
-    document.body.insertBefore(barra, document.body.firstChild);
+    var div=document.createElement("div");
+    div.id="offline-bar"; // Le ponemos id al div para luego darle estilos.
+
+    var texto=document.createElement('p');
+    texto.textContent="No tienes red en tu navegador"; // Le ponemos texto al p.
+
+    div.appendChild(texto);
+
+    // Insertamos la barra arriba del body.
+    document.body.prepend(div);
+
 }
 
-// Mostrar barra
-function mostrarBarra(){
-    crearBarra(); 
-    const barra = document.getElementById("offline-bar");
-    if (barra) barra.classList.add("visible");
-}
+/*
+  - Función que comprueba si tienes red o no.
+  - Devuelve true si hay conexión y false si no la hay.
+*/
 
-// Ocultar barra
-function ocultarBarra() {
-    const barra = document.getElementById("offline-bar");
-    if (!barra) return;
-    barra.classList.remove("visible");
-}
-
-// Comprobar conexión al cargar
 function hayConexion(){
-    if(!navigator.onLine){
-        mostrarBarra();
+    var conexion=false;
+
+    if(navigator.onLine){
+        conexion=true;
     }else{
-        ocultarBarra();
+        conexion=false;
+    }
+
+    if(!conexion){
+        crearBarra();
     }
 }
 
-window.addEventListener("offline", mostrarBarra);
-window.addEventListener("online", ocultarBarra);
-
-// Ejecutar en el inicio
 hayConexion();
+
