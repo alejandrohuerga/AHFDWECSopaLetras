@@ -1,3 +1,5 @@
+import { miFuncionClick } from "./funcionalidad.js";
+import { comprobarClaseSeleccionada } from "./funcionalidad.js";
 
 // Creamos el array y lo rellenamos con algunas palabras de ejemplo.
 
@@ -271,10 +273,14 @@ function dibujarTablero(tablero){
         var fila=document.createElement("tr");
         
         for(let j=0;j<tablero[i].length;j++){
+            
             var letra = tablero[i][j] === '' ? '' : tablero[i][j];
 
             var celda=document.createElement("td");
-            
+
+            celda.addEventListener("click",miFuncionClick); // Escucha de click y aplica la funcion del script externo.
+                
+
             celda.appendChild(document.createTextNode(letra));
             fila.appendChild(celda);
         }

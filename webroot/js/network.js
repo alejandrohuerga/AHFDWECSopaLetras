@@ -16,6 +16,7 @@ function crearBarra(){
 
 }
 
+
 /*
   - Función que comprueba si tienes red o no.
   - Devuelve true si hay conexión y false si no la hay.
