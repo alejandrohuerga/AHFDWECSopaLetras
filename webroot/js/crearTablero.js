@@ -268,6 +268,7 @@ function escribirPalabra(tablero,palabras,posicion,direccionAleatoria){
 
 function dibujarTablero(tablero){
     var tabla=document.createElement("table");
+    tabla.setAttribute("id","tablaTablero");
     
     for(let i=0;i<tablero.length;i++){
         var fila=document.createElement("tr");
@@ -279,7 +280,6 @@ function dibujarTablero(tablero){
             var celda=document.createElement("td");
 
             celda.addEventListener("click",miFuncionClick); // Escucha de click y aplica la funcion del script externo.
-                
 
             celda.appendChild(document.createTextNode(letra));
             fila.appendChild(celda);
