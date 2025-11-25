@@ -1,5 +1,5 @@
 import { miFuncionClick } from "./funcionalidad.js";
-import { comprobarClaseSeleccionada } from "./funcionalidad.js";
+
 
 // Creamos el array y lo rellenamos con algunas palabras de ejemplo.
 
@@ -291,6 +291,7 @@ function dibujarTablero(tablero){
     document.getElementById("contenidoPrincipal").appendChild(tabla);
 }
 
+
 /*
     - Función que rellena los huecos vacios con letras aleatorias.
     - Recibe como parametro el tablero con las palabras colocadas.
@@ -339,12 +340,17 @@ function mostrarPalabras(palabras){
     document.getElementById("contenidoPrincipal").appendChild(div);
 }
 
-
-escribirPalabra(tablero,palabras,posicion,direccionAleatoria);
-mostrarPalabras(palabras);
-rellenarTablero(tablero);
+// Después de generar tablero y colocar palabras
+escribirPalabra(tablero, palabras, posicion, direccionAleatoria);
+tablero = rellenarTablero(tablero); // Guardamos el tablero actualizado
 dibujarTablero(tablero);
-
+mostrarPalabras(palabras);
+/*
+escribirPalabra(tablero,palabras,posicion,direccionAleatoria); 
+mostrarPalabras(palabras); 
+rellenarTablero(tablero); 
+dibujarTablero(tablero);
+*/
 
 
 

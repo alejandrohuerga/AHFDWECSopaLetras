@@ -86,3 +86,6 @@ footer{
     font-weight: bold;
 }
 
+td.seleccionada {
+    background-color: yellow;
+}
