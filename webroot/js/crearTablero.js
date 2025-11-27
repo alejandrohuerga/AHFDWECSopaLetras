@@ -345,6 +345,7 @@ escribirPalabra(tablero, palabras, posicion, direccionAleatoria);
 tablero = rellenarTablero(tablero); // Guardamos el tablero actualizado
 dibujarTablero(tablero);
 mostrarPalabras(palabras);
+
 /*
 escribirPalabra(tablero,palabras,posicion,direccionAleatoria); 
 mostrarPalabras(palabras); 

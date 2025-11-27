@@ -8,7 +8,7 @@ header{
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 
@@ -88,4 +88,14 @@ footer{
 
 td.seleccionada {
     background-color: yellow;
+}
+
+/* Estilos del boton de inicio */
+
+#botonInicio{
+    width: 100px;
+    height:30px;
+    background-color: blue;
+    color: white;
+
 }

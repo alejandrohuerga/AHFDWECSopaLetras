@@ -14,7 +14,6 @@ function crearPuntuaciones(){
     localStorage.setItem("Jugador1",1000);
     localStorage.setItem("Jugador2",2000);
     localStorage.setItem("Jugador3",5000);
-    console.log("Los jugadores se guardaron correctamente");
 }
 
 function crearTablaPuntuaciones(){

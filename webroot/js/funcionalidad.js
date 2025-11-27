@@ -57,6 +57,30 @@ function seleccionarPalabra(inicio, fin) {
             inicio.classList.remove("seleccionada");
         }
 }
+ 
+// Función que crea el boton de inicio en el documento HTML mediante el DOM.
+
+function agregarBotonIncio(){
+    var botonInicio=document.createElement("button"); // Creamos el boton con el document
+    botonInicio.setAttribute("id", "botonInicio"); // Agregamos id para luego darle estilos o poder seleccionarlo.
+    var encabezado=document.getElementsByTagName("header")[0];
+    botonInicio.appendChild(document.createTextNode("Comenzar"));
+    encabezado.appendChild(botonInicio); // Se lo agregamos como hijo del header.
+
+    botonInicio.addEventListener("click",comenzarCronometro);
+
+    var cronometro=document.createElement("h4");
+    cronometro.appendChild(document.createTextNode("Esto es el cronometro"));
+    cronometro.setAttribute("id","cronometro");
+    
+    function comenzarCronometro(){
+        encabezado.appendChild(cronometro);
+    }
+}
+
+agregarBotonIncio();
+
+
 
 
 
