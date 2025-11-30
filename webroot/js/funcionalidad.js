@@ -191,7 +191,6 @@ function agregarBotonInicio() {
     botonInicio.addEventListener("click", () => {
         // Dibujar tablero y mostrar palabras al pulsar
         dibujarTablero(tablero);
-        mostrarPalabras(palabras);
 
         // Iniciar cronómetro
         cronometro.textContent = `Tiempo: ${segundos}s`;
