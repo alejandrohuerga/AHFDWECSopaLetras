@@ -93,4 +93,6 @@ function crearTablaPuntuaciones(){
 }
 
 crearPuntuaciones();
+
 crearTablaPuntuaciones();
+

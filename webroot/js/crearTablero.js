@@ -1,10 +1,10 @@
 import { miFuncionClick } from "./funcionalidad.js";
-
+export { tablero, dibujarTablero, mostrarPalabras };
 
 // Creamos el array y lo rellenamos con algunas palabras de ejemplo.
 
 var palabras=new Array();
-palabras=["PATO","BALON","MONITOR","FEMUR","ORFANATO","BALONCESTO"];
+export var palabras=["PATO","BALON","MONITOR","FEMUR","ORFANATO","BALONCESTO"];
 
 // Ordenamos el Array de palabras mas larga a mas corta para colocar primero las largas.
 
@@ -75,7 +75,7 @@ var dimension=calcularDimensionTablero(palabras);
     - La funcion devuelve un array bidimensional (Tablero). 
 */ 
 
-function crearTablero(dimension){
+export function crearTablero(dimension){
     var tablero=new Array();
     dimension=calcularDimensionTablero(palabras);
     for(let i=0;i<dimension;i++){
@@ -298,7 +298,7 @@ function dibujarTablero(tablero){
     - Devuelve el tablero con las palabras y relleno.
 */
 
-function rellenarTablero(tablero){
+export function rellenarTablero(tablero){
     
     var letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
@@ -325,6 +325,7 @@ function rellenarTablero(tablero){
 function mostrarPalabras(palabras){
     var div=document.createElement("div");
     var lista=document.createElement("ul");
+    lista.setAttribute("id", "listaPalabras");
 
     for(let i=0;i<palabras.length;i++){
 
@@ -343,7 +344,7 @@ function mostrarPalabras(palabras){
 // Después de generar tablero y colocar palabras
 escribirPalabra(tablero, palabras, posicion, direccionAleatoria);
 tablero = rellenarTablero(tablero); // Guardamos el tablero actualizado
-dibujarTablero(tablero);
+//dibujarTablero(tablero);
 mostrarPalabras(palabras);
 
 /*

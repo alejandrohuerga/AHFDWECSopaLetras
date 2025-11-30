@@ -99,3 +99,25 @@ td.seleccionada {
     color: white;
 
 }
+
+.correcta {
+    background-color: lightgreen !important;
+    font-weight: bold;
+}
+
+.incorrecta{
+    background-color: yellow; /* empieza amarillo */
+    transition: background-color 0.5s;
+}
+
+.incorrecta-roja {
+    background-color: red; /* luego rojo */
+}
+
+li {
+    transition: opacity 0.5s;
+}
+
+li.desaparecer {
+    opacity: 0;
+}
