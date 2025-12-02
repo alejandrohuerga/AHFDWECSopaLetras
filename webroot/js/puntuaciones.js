@@ -11,9 +11,11 @@
 */
 
 function crearPuntuaciones(){
+    /*
     localStorage.setItem("Jugador1",1000);
     localStorage.setItem("Jugador2",2000);
     localStorage.setItem("Jugador3",5000);
+    */
 }
 
 function crearTablaPuntuaciones(){
@@ -73,11 +75,11 @@ function crearTablaPuntuaciones(){
         tr.classList.add("fila-puntuacion");
 
         const tdNombre = document.createElement("td");
-        tdNombre.classList.add("celda-puntuacion");
+        tdNombre.classList.add("celda-puntuacion-nombre");
         tdNombre.textContent = obj.nombre;
         
         const tdPuntos = document.createElement("td");
-        tdPuntos.classList.add("celda-puntuacion");
+        tdPuntos.classList.add("celda-puntuacion-puntos");
         tdPuntos.textContent = obj.puntos;
         
 

@@ -140,10 +140,21 @@ function eliminarPalabraLista(palabra) {
     const restantes=document.querySelectorAll("#listaPalabras li");
 
     if(restantes.length ===0){
-        alert("Has terminado el juego");
+        alert("Has terminado el juego, tu tiempo es: "+cronometro.textContent);
     }
+}
+
+/*
+    - Función la cual nos permite anotar un nuevo record en la tabla de puntuaciones.
+*/
+function anotarRecord(){
+    
     
 }
+
+
+
+
 
 // Función que marca las palabras correctas en verde en el tablero
 
