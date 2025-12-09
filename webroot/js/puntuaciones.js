@@ -7,15 +7,21 @@
 
 /*
     - Función que crea tres puntuaciones con la ApiWebStorage.
-    - 3 puntuaciones de ejemplo para validar las funciones.
+    
 */
 
-function crearPuntuaciones(){
+function guardarPuntuaciones(sg){
+    localStorage.setItem("puntuacion1",10000);
+    localStorage.setItem("puntuacion2",20000);
+    localStorage.setItem("puntuacion3",30000);
     /*
-    localStorage.setItem("Jugador1",1000);
-    localStorage.setItem("Jugador2",2000);
-    localStorage.setItem("Jugador3",5000);
+    if(sg<localStorage.getItem(1) || sg<localStorage.getItem(2) || sg>localStorage.getItem(3)){
+        localStorage.setItem("puntuacion",sg);
+        crearTablaPuntuaciones();
+    }
     */
+
+    crearTablaPuntuaciones();
 }
 
 function crearTablaPuntuaciones(){
@@ -56,9 +62,8 @@ function crearTablaPuntuaciones(){
     for (let i = 0; i < localStorage.length; i++) {
         let clave = localStorage.key(i);
 
-        if (clave.startsWith("Jugador")) {
+        if (clave.startsWith("puntuacion")) {
             datos.push({
-                nombre: clave,
                 puntos: Number(localStorage.getItem(clave))
             });
         }
@@ -66,6 +71,7 @@ function crearTablaPuntuaciones(){
 
      // Ordenar de mayor a menor
     datos.sort((a, b) => b.puntos - a.puntos);
+   
 
     // CUERPO TABLA
     const tbody = document.createElement("tbody");
@@ -76,6 +82,7 @@ function crearTablaPuntuaciones(){
 
         const tdNombre = document.createElement("td");
         tdNombre.classList.add("celda-puntuacion-nombre");
+        const inputNombre=document.createElement("input");
         tdNombre.textContent = obj.nombre;
         
         const tdPuntos = document.createElement("td");
@@ -84,6 +91,7 @@ function crearTablaPuntuaciones(){
         
 
         tr.appendChild(tdNombre);
+        tdNombre.appendChild(inputNombre);
         tr.appendChild(tdPuntos);
         tbody.appendChild(tr);
     });
@@ -94,7 +102,6 @@ function crearTablaPuntuaciones(){
     contenedorTabla.appendChild(tabla);
 }
 
-crearPuntuaciones();
+
 
 crearTablaPuntuaciones();
-

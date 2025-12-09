@@ -2,8 +2,8 @@ export let seleccionInicio = null;
 export let seleccionFin = null;
 import { tablero,palabras,dibujarTablero, mostrarPalabras } from "./crearTablero.js";
 
-
-
+var segundos = 0;
+var intervalo=null;
 
 // Función que muestra por consola si se ha hecho click en una celda.
 
@@ -141,17 +141,11 @@ function eliminarPalabraLista(palabra) {
 
     if(restantes.length ===0){
         alert("Has terminado el juego, tu tiempo es: "+cronometro.textContent);
+        clearInterval(intervalo);
+        guardarPuntuaciones(segundos);
     }
-}
 
-/*
-    - Función la cual nos permite anotar un nuevo record en la tabla de puntuaciones.
-*/
-function anotarRecord(){
-    
-    
 }
-
 
 
 
@@ -196,8 +190,8 @@ function agregarBotonInicio() {
 
     const cronometro = document.createElement("h4");
     cronometro.id = "cronometro";
-    let segundos = 0;
-    let intervalo; // guardamos el setInterval
+    
+    
 
     botonInicio.addEventListener("click", () => {
         // Dibujar tablero y mostrar palabras al pulsar
@@ -215,6 +209,8 @@ function agregarBotonInicio() {
         // Deshabilitar botón para que no se pulse otra vez
         botonInicio.disabled = true;
     });
+
+    
 }
 
 agregarBotonInicio();
