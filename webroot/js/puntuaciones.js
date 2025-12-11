@@ -4,23 +4,25 @@
 */
 
 
-
 /*
     - Función que crea tres puntuaciones con la ApiWebStorage.
     
 */
 
 function guardarPuntuaciones(sg){
-    localStorage.setItem("puntuacion1",10000);
-    localStorage.setItem("puntuacion2",20000);
-    localStorage.setItem("puntuacion3",30000);
+
+    if(sg<localStorage.getItem(1)){
+        localStorage.setItem("puntuacion1",sg);
+    }else if(sg<localStorage.getItem(2)){
+        localStorage.setItem("puntuacion2",sg);
+    }else if(sg<localStorage.getItem(3)){
+        localStorage.setItem("puntuacion3",sg);
+    }
     /*
     if(sg<localStorage.getItem(1) || sg<localStorage.getItem(2) || sg>localStorage.getItem(3)){
         localStorage.setItem("puntuacion",sg);
-        crearTablaPuntuaciones();
     }
     */
-
     crearTablaPuntuaciones();
 }
 
@@ -58,6 +60,7 @@ function crearTablaPuntuaciones(){
 
     // 5. Recuperar puntuaciones del localStorage
     let datos = [];
+    
 
     for (let i = 0; i < localStorage.length; i++) {
         let clave = localStorage.key(i);
@@ -70,8 +73,8 @@ function crearTablaPuntuaciones(){
     }
 
      // Ordenar de mayor a menor
-    datos.sort((a, b) => b.puntos - a.puntos);
-   
+    //datos.sort((a, b) => b.puntos - a.puntos);
+    datos.sort();
 
     // CUERPO TABLA
     const tbody = document.createElement("tbody");
@@ -104,4 +107,4 @@ function crearTablaPuntuaciones(){
 
 
 
-crearTablaPuntuaciones();
+
