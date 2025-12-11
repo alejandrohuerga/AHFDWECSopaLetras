@@ -9,6 +9,10 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    & h1{
+        text-decoration: none;
+    }
 }
 
 
@@ -38,6 +42,7 @@ ul {
 li {
     font-weight: bold;
     font-size: 18px;
+    text-decoration: none;
 }
 
 /* Centrar la tabla */
