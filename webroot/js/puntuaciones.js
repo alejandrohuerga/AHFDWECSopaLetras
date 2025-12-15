@@ -10,29 +10,34 @@
 */
 
 function guardarPuntuaciones(sg){
+    
+    if (!localStorage.getItem("puntuacion1")) {
+        localStorage.setItem("puntuacion1", sg);
+    } else if (!localStorage.getItem("puntuacion2")) {
+        localStorage.setItem("puntuacion2", sg);
+    } else if (!localStorage.getItem("puntuacion3")) {
+        localStorage.setItem("puntuacion3", sg);
+    } else {
+        
+        if (sg < Number(localStorage.getItem("puntuacion1"))) {
+            localStorage.setItem("puntuacion3", localStorage.getItem("puntuacion2"));
+            localStorage.setItem("puntuacion2", localStorage.getItem("puntuacion1"));
+            localStorage.setItem("puntuacion1", sg);
+        } else if (sg < Number(localStorage.getItem("puntuacion2"))) {
+            localStorage.setItem("puntuacion3", localStorage.getItem("puntuacion2"));
+            localStorage.setItem("puntuacion2", sg);
+        } else if (sg < Number(localStorage.getItem("puntuacion3"))) {
+            localStorage.setItem("puntuacion3", sg);
+        }
+    }
 
-    if(sg<localStorage.getItem(1)){
-        localStorage.setItem("puntuacion1",sg);
-    }else if(sg<localStorage.getItem(2)){
-        localStorage.setItem("puntuacion2",sg);
-    }else if(sg<localStorage.getItem(3)){
-        localStorage.setItem("puntuacion3",sg);
-    }
-    /*
-    if(sg<localStorage.getItem(1) || sg<localStorage.getItem(2) || sg>localStorage.getItem(3)){
-        localStorage.setItem("puntuacion",sg);
-    }
-    */
     crearTablaPuntuaciones();
 }
 
 function crearTablaPuntuaciones(){
 
-    // 1. Obtener el main donde debe ir la tabla
-    var main=document.getElementById("contenidoPrincipal");
+    var main = document.getElementById("contenidoPrincipal");
 
-
-    // 2. Creamos contenedorTabla si NO existe
     let contenedorTabla = document.getElementById("contenedorTabla");
 
     if (!contenedorTabla) {
@@ -41,10 +46,12 @@ function crearTablaPuntuaciones(){
         main.appendChild(contenedorTabla);
     }
 
+    
+    contenedorTabla.innerHTML = "";
+
     const tabla = document.createElement("table");
     tabla.classList.add("tabla-puntuaciones");
 
-    // CABECERA
     const thead = document.createElement("thead");
     const trHead = document.createElement("tr");
 
@@ -57,52 +64,40 @@ function crearTablaPuntuaciones(){
     thead.appendChild(trHead);
     tabla.appendChild(thead);
 
-
-    // 5. Recuperar puntuaciones del localStorage
-    let datos = [];
-    
-
-    for (let i = 0; i < localStorage.length; i++) {
-        let clave = localStorage.key(i);
-
-        if (clave.startsWith("puntuacion")) {
-            datos.push({
-                puntos: Number(localStorage.getItem(clave))
-            });
-        }
-    }
-
-     // Ordenar de mayor a menor
-    //datos.sort((a, b) => b.puntos - a.puntos);
-    datos.sort();
-
-    // CUERPO TABLA
     const tbody = document.createElement("tbody");
 
-    datos.forEach(obj => {
+    
+    for (let i = 1; i <= 3; i++) {
+        const valor = localStorage.getItem("puntuacion" + i);
+        if (!valor) continue;
+
         const tr = document.createElement("tr");
-        tr.classList.add("fila-puntuacion");
 
         const tdNombre = document.createElement("td");
-        tdNombre.classList.add("celda-puntuacion-nombre");
-        const inputNombre=document.createElement("input");
-        tdNombre.textContent = obj.nombre;
-        
+        const inputNombre = document.createElement("input");
+
+        inputNombre.placeholder = "Nombre";
+        tdNombre.appendChild(inputNombre);
+
+        inputNombre.addEventListener("blur", () => {
+            // Cuando pierde el foco, se bloquea mostrando el nombre
+            if (inputNombre.value.trim() !== "") {
+                inputNombre.parentElement.textContent = inputNombre.value.trim();
+            }
+        });
+
         const tdPuntos = document.createElement("td");
-        tdPuntos.classList.add("celda-puntuacion-puntos");
-        tdPuntos.textContent = obj.puntos;
-        
+        tdPuntos.textContent = valor;
 
         tr.appendChild(tdNombre);
-        tdNombre.appendChild(inputNombre);
         tr.appendChild(tdPuntos);
         tbody.appendChild(tr);
-    });
+    }
 
     tabla.appendChild(tbody);
-
-    // 6. Insertar tabla en el contenedor
     contenedorTabla.appendChild(tabla);
+
+    
 }
 
 
