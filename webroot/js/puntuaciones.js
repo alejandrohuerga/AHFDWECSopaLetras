@@ -3,14 +3,47 @@
     - Incluye una funcion que guarda las 3 primeras puntuaciones en una tabla.
 */
 
-
 /*
     - Función que crea tres puntuaciones con la ApiWebStorage.
     
 */
 
 function guardarPuntuaciones(sg){
+    var primera = new Object(); // Objeto primera , la primera puntuacion de cada objeto de dificultad.
+    var segunda = new Object(); // Objeto segunda , la segunda puntuacion de cada objeto de dificultad.
+    var tercera = new Object(); // Objeto tercera , la tercera puntuacion de cada objeto de dificultad.
+
+    var facil=new Object( // Objeto facil , propiedad del objecto MejoresPuntuaciones.
+        primera,
+        segunda,
+        tercera
+    );
+
+    var media=new Object( // Objeto media , propiedad del objecto MejoresPuntuaciones.
+        primera,
+        segunda,
+        tercera
+    );
+
+    var dificil=new Object( // Objeto dificil , propiedad del objecto MejoresPuntuaciones.
+        primera,
+        segunda,
+        tercera
+    ); 
+
+    var MejoresPuntuaciones = new Object( // Objeto llamado mejores puntuaciones, tiene como propiedades 3 objetos (facil,media,dificil)
+        facil,
+        media,
+        dificil
+    ); 
+
     
+
+
+    console.log(MejoresPuntuaciones);
+
+
+    /*
     if (!localStorage.getItem("puntuacion1")) {
         localStorage.setItem("puntuacion1", sg);
     } else if (!localStorage.getItem("puntuacion2")) {
@@ -18,7 +51,6 @@ function guardarPuntuaciones(sg){
     } else if (!localStorage.getItem("puntuacion3")) {
         localStorage.setItem("puntuacion3", sg);
     } else {
-        
         if (sg < Number(localStorage.getItem("puntuacion1"))) {
             localStorage.setItem("puntuacion3", localStorage.getItem("puntuacion2"));
             localStorage.setItem("puntuacion2", localStorage.getItem("puntuacion1"));
@@ -32,7 +64,10 @@ function guardarPuntuaciones(sg){
     }
 
     crearTablaPuntuaciones();
+    */
 }
+
+
 
 function crearTablaPuntuaciones(){
 
@@ -96,8 +131,6 @@ function crearTablaPuntuaciones(){
 
     tabla.appendChild(tbody);
     contenedorTabla.appendChild(tabla);
-
-    
 }
 
 
