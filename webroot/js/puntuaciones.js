@@ -9,66 +9,92 @@
 */
 
 function guardarPuntuaciones(sg){
-    var primera = new Object(); // Objeto primera , la primera puntuacion de cada objeto de dificultad.
-    var segunda = new Object(); // Objeto segunda , la segunda puntuacion de cada objeto de dificultad.
-    var tercera = new Object(); // Objeto tercera , la tercera puntuacion de cada objeto de dificultad.
-
-    var facil=new Object( // Objeto facil , propiedad del objecto MejoresPuntuaciones.
-        primera,
-        segunda,
-        tercera
-    );
-
-    var media=new Object( // Objeto media , propiedad del objecto MejoresPuntuaciones.
-        primera,
-        segunda,
-        tercera
-    );
-
-    var dificil=new Object( // Objeto dificil , propiedad del objecto MejoresPuntuaciones.
-        primera,
-        segunda,
-        tercera
-    ); 
-
-    var MejoresPuntuaciones = new Object( // Objeto llamado mejores puntuaciones, tiene como propiedades 3 objetos (facil,media,dificil)
-        facil,
-        media,
-        dificil
-    ); 
-
     
-
-
-    console.log(MejoresPuntuaciones);
-
-
-    /*
+    
+    MejoresPuntuaciones={
+        facil:{
+            primera:["",0],
+            segunda:["",0],
+            tercera:["",0],
+        },
+        media:{
+            primera:["",0],
+            segunda:["",0],
+            tercera:["",0],
+        },
+        alta:{
+            primera:["",0],
+            segunda:["",0],
+            tercera:["",0],
+        }
+    }
+    
+    
+    
     if (!localStorage.getItem("puntuacion1")) {
         localStorage.setItem("puntuacion1", sg);
+        MejoresPuntuaciones.facil.primera[0]=sg;
     } else if (!localStorage.getItem("puntuacion2")) {
         localStorage.setItem("puntuacion2", sg);
+        MejoresPuntuaciones.facil.segunda[0]=sg;
     } else if (!localStorage.getItem("puntuacion3")) {
         localStorage.setItem("puntuacion3", sg);
+        MejoresPuntuaciones.facil.tercera[0]=sg;
     } else {
         if (sg < Number(localStorage.getItem("puntuacion1"))) {
             localStorage.setItem("puntuacion3", localStorage.getItem("puntuacion2"));
+            MejoresPuntuaciones.facil.tercera[0]=MejoresPuntuaciones.facil.segunda[0];
             localStorage.setItem("puntuacion2", localStorage.getItem("puntuacion1"));
+            MejoresPuntuaciones.facil.segunda[0]=MejoresPuntuaciones.facil.primera[0];
             localStorage.setItem("puntuacion1", sg);
+            MejoresPuntuaciones.facil.primera[0]=sg;
         } else if (sg < Number(localStorage.getItem("puntuacion2"))) {
             localStorage.setItem("puntuacion3", localStorage.getItem("puntuacion2"));
+            MejoresPuntuaciones.facil.tercera[0]=MejoresPuntuaciones.facil.segunda[0];
             localStorage.setItem("puntuacion2", sg);
+            MejoresPuntuaciones.facil.segunda[sg];
         } else if (sg < Number(localStorage.getItem("puntuacion3"))) {
             localStorage.setItem("puntuacion3", sg);
+            MejoresPuntuaciones.facil.tercera[sg];
         }
     }
 
-    crearTablaPuntuaciones();
-    */
+    mostrarPuntuaciones(MejoresPuntuaciones,nivel=0);
+    
 }
 
 
+guardarPuntuaciones();
 
+function mostrarPuntuaciones(oPuntuaciones,nivel=0){
+    
+    var main = document.getElementById("contenidoPrincipal");
+
+    let contenedorTabla = document.getElementById("contenedorTabla");
+
+    if (!contenedorTabla) {
+        contenedorTabla = document.createElement("div");
+        contenedorTabla.id = "contenedorTabla";
+        main.appendChild(contenedorTabla);
+    }
+
+    contenedorTabla.innerHTML="";
+
+    const tabla = document.createElement("table");
+    tabla.classList.add("tabla-puntuaciones");
+
+    const thead = document.createElement("thead");
+    const trHead = document.createElement("tr");
+
+    const tBody = document.createElement("tbody");
+    const trPrimera = document.createElement("tr");
+    const tdNombrePrimera = document.createElement("td");
+    const tdPuntuacionPrimera = document.createElement("td");
+
+}
+
+mostrarPuntuaciones();
+/*
 function crearTablaPuntuaciones(){
 
     var main = document.getElementById("contenidoPrincipal");
@@ -134,5 +160,5 @@ function crearTablaPuntuaciones(){
 }
 
 
-
+*/
 
