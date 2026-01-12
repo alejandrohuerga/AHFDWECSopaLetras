@@ -87,9 +87,20 @@ function mostrarPuntuaciones(oPuntuaciones,nivel=0){
     const trHead = document.createElement("tr");
 
     const tBody = document.createElement("tbody");
+    // Fila primera puntuación.
     const trPrimera = document.createElement("tr");
-    const tdNombrePrimera = document.createElement("td");
-    const tdPuntuacionPrimera = document.createElement("td");
+    const tdNombrePrimera = document.createElement("td"); // Celda nombre primera puntuación.
+    const tdPuntuacionPrimera = document.createElement("td"); // Celda primera puntuación.
+    // Fila segunda puntuación.
+    const trSegunda = document.createElement("tr");
+    const tdNombreSegunda = document.createElement("td");
+    const tdPuntuacionSegunda = document.createElement("td");
+    // Fila tercera puntuación.
+    const trTercera = document.createElement("tr");
+    const tdNombreTercera = document.createElement("td");
+    const tdPuntuacionTercera = document.createElement("td");
+
+    
 
 }
 
