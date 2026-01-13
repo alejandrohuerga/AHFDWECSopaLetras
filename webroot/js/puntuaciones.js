@@ -3,82 +3,70 @@
     - Incluye una funcion que guarda las 3 primeras puntuaciones en una tabla.
 */
 
-/*
-    - Función que crea tres puntuaciones con la ApiWebStorage.
-    
-*/
 
-function guardarPuntuaciones(sg){
-    
-    
-    MejoresPuntuaciones={
-        facil:{
-            primera:["",0],
-            segunda:["",0],
-            tercera:["",0],
-        },
-        media:{
-            primera:["",0],
-            segunda:["",0],
-            tercera:["",0],
-        },
-        alta:{
-            primera:["",0],
-            segunda:["",0],
-            tercera:["",0],
-        }
-    }
-    
-    
-    
-    if (!localStorage.getItem("puntuacion1")) {
-        localStorage.setItem("puntuacion1", sg);
-        MejoresPuntuaciones.facil.primera[0]=sg;
-    } else if (!localStorage.getItem("puntuacion2")) {
-        localStorage.setItem("puntuacion2", sg);
-        MejoresPuntuaciones.facil.segunda[0]=sg;
-    } else if (!localStorage.getItem("puntuacion3")) {
-        localStorage.setItem("puntuacion3", sg);
-        MejoresPuntuaciones.facil.tercera[0]=sg;
-    } else {
-        if (sg < Number(localStorage.getItem("puntuacion1"))) {
-            localStorage.setItem("puntuacion3", localStorage.getItem("puntuacion2"));
-            MejoresPuntuaciones.facil.tercera[0]=MejoresPuntuaciones.facil.segunda[0];
-            localStorage.setItem("puntuacion2", localStorage.getItem("puntuacion1"));
-            MejoresPuntuaciones.facil.segunda[0]=MejoresPuntuaciones.facil.primera[0];
-            localStorage.setItem("puntuacion1", sg);
-            MejoresPuntuaciones.facil.primera[0]=sg;
-        } else if (sg < Number(localStorage.getItem("puntuacion2"))) {
-            localStorage.setItem("puntuacion3", localStorage.getItem("puntuacion2"));
-            MejoresPuntuaciones.facil.tercera[0]=MejoresPuntuaciones.facil.segunda[0];
-            localStorage.setItem("puntuacion2", sg);
-            MejoresPuntuaciones.facil.segunda[sg];
-        } else if (sg < Number(localStorage.getItem("puntuacion3"))) {
-            localStorage.setItem("puntuacion3", sg);
-            MejoresPuntuaciones.facil.tercera[sg];
-        }
-    }
 
-    mostrarPuntuaciones(MejoresPuntuaciones,nivel=0);
-    
+// Objeto global mejores puntuaciones.
+let MejoresPuntuaciones ={
+    facil:{
+        primera:["",1000],
+        segunda:["",2000],
+        tercera:["",3000]
+    }
 }
 
 
-guardarPuntuaciones();
+function guardarPuntuaciones(sg) {
 
-function mostrarPuntuaciones(oPuntuaciones,nivel=0){
-    
-    var main = document.getElementById("contenidoPrincipal");
-
-    let contenedorTabla = document.getElementById("contenedorTabla");
-
-    if (!contenedorTabla) {
-        contenedorTabla = document.createElement("div");
-        contenedorTabla.id = "contenedorTabla";
-        main.appendChild(contenedorTabla);
+    // Cargar de localStorage si existe
+    const datos = localStorage.getItem("rankingFacil");
+    if (datos) {
+        MejoresPuntuaciones = JSON.parse(datos);
     }
 
-    contenedorTabla.innerHTML="";
+    let f = MejoresPuntuaciones.facil;
+
+    let p1 = f.primera[1];
+    let p2 = f.segunda[1];
+    let p3 = f.tercera[1];
+
+    if (p1 === 0 || sg < p1) {
+        f.tercera = [...f.segunda];
+        f.segunda = [...f.primera];
+        f.primera = ["", sg];
+    }
+    else if (p2 === 0 || sg < p2) {
+        f.tercera = [...f.segunda];
+        f.segunda = ["", sg];
+    }
+    else if (p3 === 0 || sg < p3) {
+        f.tercera = ["", sg];
+    }
+
+    // Guardar
+    localStorage.setItem("rankingFacil", JSON.stringify(MejoresPuntuaciones));
+
+    mostrarPuntuaciones(MejoresPuntuaciones);
+}
+
+
+function mostrarPuntuaciones(oPuntuaciones) {
+
+    // ⬅️ Cargar desde localStorage SIEMPRE
+    const datos = localStorage.getItem("rankingFacil");
+    if (datos) {
+        oPuntuaciones = JSON.parse(datos);
+    }
+
+    const main = document.getElementById("contenidoPrincipal");
+
+    let contenedor = document.getElementById("contenedorTabla");
+    if (!contenedor) {
+        contenedor = document.createElement("div");
+        contenedor.id = "contenedorTabla";
+        main.appendChild(contenedor);
+    }
+
+    contenedor.innerHTML = "";
 
     const tabla = document.createElement("table");
     tabla.classList.add("tabla-puntuaciones");
@@ -86,50 +74,9 @@ function mostrarPuntuaciones(oPuntuaciones,nivel=0){
     const thead = document.createElement("thead");
     const trHead = document.createElement("tr");
 
-    const tBody = document.createElement("tbody");
-    // Fila primera puntuación.
-    const trPrimera = document.createElement("tr");
-    const tdNombrePrimera = document.createElement("td"); // Celda nombre primera puntuación.
-    const tdPuntuacionPrimera = document.createElement("td"); // Celda primera puntuación.
-    // Fila segunda puntuación.
-    const trSegunda = document.createElement("tr");
-    const tdNombreSegunda = document.createElement("td");
-    const tdPuntuacionSegunda = document.createElement("td");
-    // Fila tercera puntuación.
-    const trTercera = document.createElement("tr");
-    const tdNombreTercera = document.createElement("td");
-    const tdPuntuacionTercera = document.createElement("td");
-
-    
-
-}
-
-mostrarPuntuaciones();
-/*
-function crearTablaPuntuaciones(){
-
-    var main = document.getElementById("contenidoPrincipal");
-
-    let contenedorTabla = document.getElementById("contenedorTabla");
-
-    if (!contenedorTabla) {
-        contenedorTabla = document.createElement("div");
-        contenedorTabla.id = "contenedorTabla";
-        main.appendChild(contenedorTabla);
-    }
-
-    
-    contenedorTabla.innerHTML = "";
-
-    const tabla = document.createElement("table");
-    tabla.classList.add("tabla-puntuaciones");
-
-    const thead = document.createElement("thead");
-    const trHead = document.createElement("tr");
-
-    ["Jugador", "Puntuación"].forEach(texto => {
+    ["Jugador", "Puntuación"].forEach(t => {
         const th = document.createElement("th");
-        th.textContent = texto;
+        th.textContent = t;
         trHead.appendChild(th);
     });
 
@@ -138,38 +85,41 @@ function crearTablaPuntuaciones(){
 
     const tbody = document.createElement("tbody");
 
-    
-    for (let i = 1; i <= 3; i++) {
-        const valor = localStorage.getItem("puntuacion" + i);
-        if (!valor) continue;
+    const puestos = ["primera", "segunda", "tercera"];
+
+    puestos.forEach(p => {
+        const datos = oPuntuaciones.facil[p];
+        if (datos[1] === 0) return;
 
         const tr = document.createElement("tr");
 
         const tdNombre = document.createElement("td");
-        const inputNombre = document.createElement("input");
 
-        inputNombre.placeholder = "Nombre";
-        tdNombre.appendChild(inputNombre);
-
-        inputNombre.addEventListener("blur", () => {
-            // Cuando pierde el foco, se bloquea mostrando el nombre
-            if (inputNombre.value.trim() !== "") {
-                inputNombre.parentElement.textContent = inputNombre.value.trim();
-            }
-        });
+        if (datos[0] === "") {
+            const input = document.createElement("input");
+            input.placeholder = "Nombre";
+            input.addEventListener("blur", () => {
+                if (input.value.trim() !== "") {
+                    datos[0] = input.value.trim();
+                    localStorage.setItem("rankingFacil", JSON.stringify(oPuntuaciones));
+                    mostrarPuntuaciones(oPuntuaciones);
+                }
+            });
+            tdNombre.appendChild(input);
+        } else {
+            tdNombre.textContent = datos[0];
+        }
 
         const tdPuntos = document.createElement("td");
-        tdPuntos.textContent = valor;
+        tdPuntos.textContent = datos[1];
 
         tr.appendChild(tdNombre);
         tr.appendChild(tdPuntos);
         tbody.appendChild(tr);
-    }
+    });
 
     tabla.appendChild(tbody);
-    contenedorTabla.appendChild(tabla);
+    contenedor.appendChild(tabla);
 }
 
-
-*/
 
