@@ -1,5 +1,6 @@
 export let seleccionInicio = null;
 export let seleccionFin = null;
+export {miFuncionClick};
 import { tablero,palabras,dibujarTablero, mostrarPalabras } from "./crearTablero.js";
 
 var segundos = 0;
@@ -7,7 +8,7 @@ var intervalo=null;
 
 // Función que muestra por consola si se ha hecho click en una celda.
 
-export function miFuncionClick(event) {
+function miFuncionClick(event) {
     const celda = event.target;
 
     // Si no hay inicio, esta será la primera
