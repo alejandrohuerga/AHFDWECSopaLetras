@@ -1,10 +1,13 @@
+import  {palabrasGeneradas,obtenerPalabras} from "./apiPalabras.js";
 import { miFuncionClick } from "./funcionalidad.js";
 export { tablero, dibujarTablero, mostrarPalabras };
 
 // Creamos el array y lo rellenamos con algunas palabras de ejemplo.
 
 var palabras=new Array();
-export var palabras=["PATO","BALON","MONITOR","FEMUR","ORFANATO","BALONCESTO"];
+export var palabras=await obtenerPalabras();
+
+
 
 // Ordenamos el Array de palabras mas larga a mas corta para colocar primero las largas.
 
@@ -37,8 +40,8 @@ function encontrarPalabraMasLarga(palabras){
             palabraMasLarga=palabras[i];
         }
     }
-
     return palabraMasLarga;
+    
 }
 
 /* 
@@ -46,7 +49,7 @@ function encontrarPalabraMasLarga(palabras){
     - La función devuelve un array con las dimension calculada previamente.
     - la función recibe como parametro el array de palabras.
     - Utilizamos las funciones creadas anteriormente para calcular la dimensión del tablero 
-    (contarLetrasPalbras y encontrarPalabraMasLarga).
+      (contarLetrasPalbras y encontrarPalabraMasLarga).
 
 */
 
