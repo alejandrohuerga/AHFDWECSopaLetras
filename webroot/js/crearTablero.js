@@ -2,8 +2,10 @@ import  {palabrasGeneradas,obtenerPalabras} from "./apiPalabras.js";
 import { miFuncionClick } from "./funcionalidad.js";
 export { tablero, dibujarTablero, mostrarPalabras };
 
-// Creamos el array y lo rellenamos con algunas palabras de ejemplo.
 
+
+
+// Creamos el array y lo rellenamos con algunas palabras de ejemplo.
 var palabras=new Array();
 export var palabras=await obtenerPalabras();
 

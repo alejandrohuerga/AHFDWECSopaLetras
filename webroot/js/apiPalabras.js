@@ -19,7 +19,7 @@ export async function obtenerPalabras(){
     return fetch(endPoint)
         .then(response => response.json())
         .then(data =>{
-            palabrasGeneradas=data;
+            palabrasGeneradas=data.map(palabra=>palabra.toUpperCase()); // Pasamos las palabras a mayúsculas.
             return palabrasGeneradas; 
         })
         .catch(error =>{
